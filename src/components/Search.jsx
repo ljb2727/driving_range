@@ -16,7 +16,7 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import Alert from "components/Alert";
 import Snackbar from "components/Snackbar";
 import { useSelector, useDispatch } from "react-redux";
-import { changeInput } from "store/search";
+import { changeInput } from "store/golfzone";
 
 export default function Search() {
   const { golfzone } = useSelector((state) => state);
