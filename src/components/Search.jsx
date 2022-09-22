@@ -15,24 +15,17 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 
 import Alert from "components/Alert";
 import Snackbar from "components/Snackbar";
-
-const golf = [
-  { label: "쇼골프여의도점", value: 1 },
-  { label: "쇼골프김포공항점", value: 2 },
-  { label: "대성골프클럽", value: 3 },
-  { label: "엠스퀘어골프클럽", value: 4 },
-  { label: "조광골프연습장", value: 5 },
-  { label: "제이제이골프클럽", value: 6 },
-  { label: "그랜드골프클럽", value: 7 },
-  { label: "abc test", value: 8 },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { changeInput } from "store/search";
 
 export default function Search() {
-  const [list, setList] = useState(golf); //복사된 골프장 리스트
+  const { golfzone } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  let copyList = [...golfzone];
+  const [list, setList] = useState(copyList); //복사된 골프장 리스트
   const [value, setValue] = useState(""); //검색창 벨류
   const [snack, setSnack] = useState(false);
-
-  let copyList = [...golf];
 
   /* 
   인풋창에 검색된 초성이 있는 값만 리스트에 리턴 한다
@@ -84,7 +77,7 @@ export default function Search() {
                   <InputAdornment
                     position="end"
                     onClick={() => {
-                      setList(golf);
+                      setList(copyList);
                       setValue("");
                     }}
                   >
