@@ -30,6 +30,7 @@ const golf = [
 export default function Search() {
   const [list, setList] = useState(golf); //복사된 골프장 리스트
   const [value, setValue] = useState(""); //검색창 벨류
+  const [snack, setSnack] = useState(false);
 
   let copyList = [...golf];
 
@@ -56,6 +57,11 @@ export default function Search() {
   //검색버튼
   const onSearch = (event) => {
     console.log("검색버튼");
+
+    setSnack(false);
+    setTimeout(() => {
+      setSnack(true);
+    }, 10);
   };
 
   return (
@@ -117,8 +123,7 @@ export default function Search() {
           })}
         </List>
       </Box>
-
-      <Snackbar text="dsfkljdlkfj" open={true} />
+      {snack && <Snackbar text="입력한 골프장이 없습니다." />}
     </>
   );
 }

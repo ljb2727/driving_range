@@ -1,29 +1,47 @@
-import React from "react";
+import * as React from "react";
 import Button from "@mui/material/Button";
-import { SnackbarProvider, useSnackbar } from "notistack";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
-function MyApp({ text = "알림" }) {
-  const { enqueueSnackbar } = useSnackbar();
+export default function SimpleSnackbar({ text }) {
+  const [open, setOpen] = React.useState(true);
 
-  const handleClickVariant = (variant, text) => () => {
-    // variant could be success, error, warning, info, or default
-    enqueueSnackbar(text, { variant });
+  const handleClick = () => {
+    setOpen(true);
   };
 
-  return (
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
     <React.Fragment>
-      <Button onClick={handleClickVariant("error", text)}>
-        Show success snackbar
-      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
     </React.Fragment>
   );
-}
 
-export default function IntegrationNotistack({ text }) {
-  console.log(text);
   return (
-    <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
-      <MyApp text={text} />
-    </SnackbarProvider>
+    <div>
+      <Snackbar
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message={text}
+        action={action}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
+    </div>
   );
 }
