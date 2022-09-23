@@ -4,8 +4,8 @@ import { Box, List, ListItem, Stack, styled, Chip } from "@mui/material";
 
 const CusBox = styled(Box)`
   width: 100%;
-  //display: flex;
-  //flex-direction: column;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 
   & .banner {
@@ -15,7 +15,7 @@ const CusBox = styled(Box)`
     overflow: hidden;
     padding: 2px 4px;
     font-weight: bold;
-    display: inline-flex;
+    margin-right: auto;
   }
   & strong {
     display: flex;
