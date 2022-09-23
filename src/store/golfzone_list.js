@@ -1,3 +1,4 @@
+import Hangul from "hangul-js";
 const golfzone_list = [
   {
     value: "1",
@@ -71,4 +72,5 @@ const golfzone_list = [
   },
 ];
 
+golfzone_list.map((e) => (e.초성 = Hangul.disassemble(e.label).join("")));
 export default golfzone_list;
