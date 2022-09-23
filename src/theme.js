@@ -16,6 +16,27 @@ const theme = createTheme({
       contrastText: "#fff",
     },
   },
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          fontSize: "1rem",
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          fontSize: "0.9rem",
+        },
+      },
+    },
+  },
 });
 
 export default theme;
