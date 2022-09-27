@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { Fade } from "@mui/material";
 import theme from "theme";
-
 import Main from "routes/Main";
 
 function App() {
