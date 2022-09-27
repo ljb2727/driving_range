@@ -17,7 +17,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { green } from "@mui/material/colors";
 
-import { changeHeart } from "store/golfzone";
+import { changeHeart, preload } from "store/golfzone";
 
 const CusBox = styled(Box)`
   width: 100%;
@@ -71,6 +71,14 @@ export default function ResultList() {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    let local = JSON.parse(localStorage.getItem("myHeart"));
+    console.log(local);
+    if (local !== null && local.length !== 0) {
+      dispatch(preload(local));
+    }
+  }, []);
+
   //정렬버튼
   const onChange = (event) => {
     let value = event.target.value;
@@ -100,7 +108,7 @@ export default function ResultList() {
   };
 
   const onChageHeart = (id) => {
-    dispatch(changeHeart());
+    dispatch(changeHeart(id));
     // let list = [...copyHeart];
 
     // if (copyHeart.includes(id)) {

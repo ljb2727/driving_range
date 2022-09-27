@@ -8,16 +8,27 @@ let golfzone = createSlice({
 //즐겨찾기 저장
 let myHeart = createSlice({
   name: "heart",
-  initialState: ["1", "3", "2"],
+  initialState: [],
   reducers: {
+    preload(state, action) {
+      return action.payload;
+    },
     changeHeart(state, action) {
-      console.log("리덕스");
-      return ["2", "4"];
+      const id = action.payload;
+      if (state.includes(id)) {
+        console.log("즐겨찾기 있으면");
+        state.splice(state.indexOf(id), 1);
+      } else {
+        state.push(id);
+      }
+
+      localStorage.setItem("myHeart", JSON.stringify(state));
+      return state;
     },
   },
 });
 
-export let { changeHeart } = myHeart.actions;
+export let { changeHeart, preload } = myHeart.actions;
 export default configureStore({
   reducer: {
     golfzone: golfzone.reducer,
