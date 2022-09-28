@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Fade } from "@mui/material";
 import theme from "theme";
 import Main from "routes/Main";
+import Detail from "routes/Detail";
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="*" element={<Main />} />
           </Routes>
         </div>
       </Fade>

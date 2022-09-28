@@ -10,7 +10,6 @@ export default function Search() {
   const { golfzone } = useSelector((state) => state);
 
   const filterOptions = (options, { inputValue }) => {
-    //console.log(Hangul.disassemble(inputValue));
     return matchSorter(options, Hangul.disassemble(inputValue).join(""), {
       keys: ["초성"],
     });

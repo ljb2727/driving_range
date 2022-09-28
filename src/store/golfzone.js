@@ -14,9 +14,9 @@ let myHeart = createSlice({
       return action.payload;
     },
     changeHeart(state, action) {
+      console.log("즐겨찾기");
       const id = action.payload;
       if (state.includes(id)) {
-        console.log("즐겨찾기 있으면");
         state.splice(state.indexOf(id), 1);
       } else {
         state.push(id);
