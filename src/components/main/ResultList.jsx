@@ -50,7 +50,7 @@ const CusBox = styled(Box)`
   }
 `;
 
-const Cs_Sort = styled(Box)`
+const CsSort = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -66,24 +66,23 @@ const Cs_Sort = styled(Box)`
 export default function ResultList() {
   const { golfzone, myHeart } = useSelector((state) => state);
   const [copyList, setCopyList] = useState([...golfzone]);
-  //const [copyHeart, setCopyHeart] = useState(myHeart);
-  const [sort, setSort] = useState("");
 
+  // !정렬 기본값 distance, abc
+  const [sort, setSort] = useState("distance");
   const dispatch = useDispatch();
 
   useEffect(() => {
     let local = JSON.parse(localStorage.getItem("myHeart"));
-    console.log(local);
     if (local !== null && local.length !== 0) {
       dispatch(preload(local));
     }
   }, []);
 
-  //정렬버튼
-  const onChange = (event) => {
-    let value = event.target.value;
-    setSort(value);
-
+  // !정렬기능
+  useEffect(() => {
+    sorting(sort);
+  }, [sort]);
+  const sorting = (value) => {
     if (value === "distance") {
       copyList.sort((a, b) => {
         if (a.거리 > b.거리) {
@@ -106,38 +105,71 @@ export default function ResultList() {
       });
     }
   };
+  const onChange = (event) => {
+    let value = event.target.value;
+    sorting(value);
+    setSort(value);
+  };
 
   const onChageHeart = (id) => {
     dispatch(changeHeart(id));
-    // let list = [...copyHeart];
+  };
 
-    // if (copyHeart.includes(id)) {
-    //   //넘어온 아이디가 기존 하트 배열에 있으면  기존 하트 삭제
-    //   let idx = copyHeart.indexOf(id);
-    //   list.splice(idx, 1);
-    //   setCopyHeart(list);
-    // } else {
-    //   //없으면 추가
-    //   list.push(id);
-    //   setCopyHeart(list);
-    // }
+  // !즐겨찾기 버튼
+  const [favorite, setFavorite] = useState(false);
+  const onFavorite = (event) => {
+    if (event.target.checked) {
+      setFavorite(true);
+      console.log("checked");
+      console.log(myHeart);
+
+      //setCopyList(save);
+      return false;
+    } else {
+      setFavorite(false);
+      console.log("un checked");
+    }
+  };
+
+  // !할인가
+  const [price, setPrice] = useState(false);
+  const onPrice = (event) => {
+    if (event.target.checked) {
+      setPrice(true);
+      console.log("price check");
+    } else {
+      setPrice(false);
+      console.log("price uncheck");
+    }
   };
 
   return (
     <>
       {/* 정렬 */}
       {JSON.stringify(myHeart)}
-      <Cs_Sort>
+      <CsSort>
         <Box>
           <FormControlLabel
             className="check"
-            control={<Checkbox sx={{ padding: 0 }} defaultChecked />}
+            control={
+              <Checkbox
+                sx={{ padding: 0 }}
+                checked={favorite}
+                onChange={(event) => onFavorite(event)}
+              />
+            }
             label="즐겨찾기"
             size="small"
           />
           <FormControlLabel
             className="check"
-            control={<Checkbox sx={{ padding: 0 }} defaultChecked />}
+            control={
+              <Checkbox
+                sx={{ padding: 0 }}
+                checked={price}
+                onChange={(event) => onPrice(event)}
+              />
+            }
             label="할인가"
             size="small"
           />
@@ -162,7 +194,7 @@ export default function ResultList() {
             <MenuItem value={"abc"}>가나다순</MenuItem>
           </Select>
         </FormControl>
-      </Cs_Sort>
+      </CsSort>
 
       <List>
         {copyList.map((item, i) => {
