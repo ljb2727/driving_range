@@ -3,7 +3,6 @@ import Hangul from "hangul-js";
 import { matchSorter } from "match-sorter";
 import { TextField, Box, Autocomplete, Button } from "@mui/material";
 
-import ResultList from "components/main/ResultList";
 import { useSelector } from "react-redux";
 
 export default function Search() {
@@ -42,8 +41,6 @@ export default function Search() {
           getOptionLabel={(option) => option.label}
         />
       </Box>
-
-      <ResultList />
     </>
   );
 }

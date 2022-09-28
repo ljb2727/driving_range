@@ -18,6 +18,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import { green } from "@mui/material/colors";
 
 import { changeHeart, preload } from "store/golfzone";
+import { useNavigate } from "react-router-dom";
 
 const CusBox = styled(Box)`
   width: 100%;
@@ -129,6 +130,8 @@ export default function ResultList() {
       setFavorite(false);
       console.log("un checked");
     }
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   // !할인가
@@ -142,6 +145,8 @@ export default function ResultList() {
       console.log("price uncheck");
     }
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -202,6 +207,9 @@ export default function ResultList() {
             <ListItem
               key={item.id}
               sx={{ borderTop: "1px solid rgba(0, 0, 0, 0.12)" }}
+              onClick={(e) => {
+                navigate(`detail/${item.id}`);
+              }}
             >
               <CusBox>
                 {/* 즐겨찾기 */}
@@ -216,7 +224,10 @@ export default function ResultList() {
                   }}
                   icon={<FavoriteBorder />}
                   checkedIcon={<Favorite color="green" />}
-                  onChange={() => onChageHeart(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onChageHeart(item.id);
+                  }}
                 />
                 {item.할인가 && <Box className="banner">할인가</Box>}
                 {`id :${item.id}`}
