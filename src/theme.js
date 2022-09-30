@@ -1,9 +1,9 @@
-import { createTheme, styled } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      light: "#42a5f5",
-      main: "#1976d2",
+      light: "#436ae372a5f5",
+      main: "#36ae37",
       contrastText: "#fff",
     },
     secondary: {
@@ -11,7 +11,7 @@ const theme = createTheme({
       contrastText: "#fff",
     },
     green: {
-      light: "#8fcf42",
+      light: "#36ae37",
       main: "#36ae37",
       contrastText: "#fff",
     },
@@ -19,6 +19,11 @@ const theme = createTheme({
   components: {
     // Name of the component
     MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        variant: "contained",
+        fullWidth: true,
+      },
       styleOverrides: {
         // Name of the slot
         root: {
@@ -33,6 +38,13 @@ const theme = createTheme({
         root: {
           // Some CSS
           fontSize: "0.9rem",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          //background: "none",
         },
       },
     },

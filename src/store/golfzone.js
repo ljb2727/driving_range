@@ -5,6 +5,26 @@ let golfzone = createSlice({
   initialState: golfzone_list,
 });
 
+//dialog 전역 상태
+let showDialog = createSlice({
+  name: "dialog",
+  initialState: false,
+  reducers: {
+    openDialog() {
+      console.log("open dialog");
+      return true;
+    },
+    closeDialog() {
+      console.log("close dialog");
+      return false;
+    },
+    toggleDialog(state) {
+      console.log("toggle dialog");
+      return !state;
+    },
+  },
+});
+
 //즐겨찾기 저장
 let myHeart = createSlice({
   name: "heart",
@@ -29,9 +49,11 @@ let myHeart = createSlice({
 });
 
 export let { changeHeart, preload } = myHeart.actions;
+export let { openDialog, closeDialog, toggleDialog } = showDialog.actions;
 export default configureStore({
   reducer: {
     golfzone: golfzone.reducer,
     myHeart: myHeart.reducer,
+    showDialog: showDialog.reducer,
   },
 });
