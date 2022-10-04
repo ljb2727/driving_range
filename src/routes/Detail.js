@@ -163,7 +163,7 @@ export default function Detail() {
           <Drawer target={target} />
         </Box>
       </DetailBox>
-      <FullScreenDialog />
+      <FullScreenDialog target={target} />
     </>
   );
 }

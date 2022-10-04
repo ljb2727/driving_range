@@ -1,7 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -14,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function FullScreenDialog({ target }) {
   const dispatch = useDispatch();
   const { showDialog } = useSelector((state) => state);
 
@@ -36,6 +35,9 @@ export default function FullScreenDialog() {
       >
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              {target.label}
+            </Typography>
             <IconButton
               edge="start"
               color="inherit"
@@ -44,9 +46,6 @@ export default function FullScreenDialog() {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
-            </Typography>
           </Toolbar>
         </AppBar>
         list
