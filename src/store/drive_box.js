@@ -1,6 +1,6 @@
 let defaultValue = "예약불가";
 let [옵션1, 옵션2, 옵션3] = ["좌타", "스윙분석타석", "일반타석"];
-const driveBox = [
+const list = [
   {
     id: 1,
     타석: [
@@ -40,4 +40,4 @@ const driveBox = [
   },
 ];
 
-export default driveBox;
+export default list;
