@@ -46,6 +46,7 @@ let current;
 export default function BasicTabs() {
   const { id } = useParams();
   const { driveBox } = useSelector((state) => state);
+  console.log(driveBox);
   current = driveBox[driveBox.findIndex((e) => String(e.id) === String(id))];
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {

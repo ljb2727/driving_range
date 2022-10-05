@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { useDispatch, useSelector } from "react-redux";
-import { openDialog, closeDialog, toggleDialog } from "store/golfzone";
+import { openDialog, closeDialog, toggleDialog } from "store";
 
 import Tab from "components/detail/Tab";
 const Transition = React.forwardRef(function Transition(props, ref) {
