@@ -15,7 +15,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
 
-import { toggleDialog } from "store";
+import { toggleDialog } from "store/golfzone";
 import { useDispatch } from "react-redux";
 
 export default function MyDrawer({ target, anchor = "bottom" }) {
