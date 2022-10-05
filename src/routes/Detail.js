@@ -163,11 +163,7 @@ export default function Detail() {
           <Drawer target={target} />
         </Box>
       </DetailBox>
-<<<<<<< HEAD
       <FullScreenDialog target={target} />
-=======
-      <FullScreenDialog />
->>>>>>> c89386062fadfcf0f098d753fe25f0931b00e69f
     </>
   );
 }

@@ -17,11 +17,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { green } from "@mui/material/colors";
 
-<<<<<<< HEAD
 import { changeHeart, preload } from "store";
-=======
-import { changeHeart, preload } from "store/golfzone";
->>>>>>> c89386062fadfcf0f098d753fe25f0931b00e69f
 import { useNavigate } from "react-router-dom";
 
 const CusBox = styled(Box)`
