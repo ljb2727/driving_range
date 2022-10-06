@@ -113,7 +113,6 @@ const StyleOption = styled(Box)`
 `;
 
 function DriveBox({ value, id }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showSnack, setSnack] = React.useState(false);
 
@@ -125,7 +124,6 @@ function DriveBox({ value, id }) {
         setSnack(false);
       }, 1000);
     } else if (time !== null) {
-      dispatch(closeDialog());
       navigate(`/pay/${id}/${floor}/${box}`);
     }
   };

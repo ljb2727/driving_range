@@ -7,34 +7,17 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import { useDispatch, useSelector } from "react-redux";
-import { openDialog, closeDialog, toggleDialog } from "store";
 
 import Tab from "components/detail/Tab";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog({ target }) {
-  const dispatch = useDispatch();
-  const { show } = useSelector((state) => state.showDialog);
-
-  const handleClickOpen = () => {
-    dispatch(openDialog());
-  };
-
-  const handleClose = () => {
-    dispatch(closeDialog());
-  };
-
+export default function FullScreenDialog({ target, show, open, close }) {
+  console.log(close);
   return (
     <div>
-      <Dialog
-        fullScreen
-        open={show}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
+      <Dialog fullScreen open={show} TransitionComponent={Transition}>
         <AppBar sx={{ position: "relative" }} elevation={0}>
           <Toolbar>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
@@ -43,7 +26,7 @@ export default function FullScreenDialog({ target }) {
             <IconButton
               edge="start"
               color="inherit"
-              onClick={handleClose}
+              onClick={() => close()}
               aria-label="close"
             >
               <CloseIcon />

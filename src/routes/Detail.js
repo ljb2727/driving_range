@@ -14,6 +14,16 @@ import "swiper/css";
 import Drawer from "components/detail/Drawer";
 
 export default function Detail() {
+  const [fullDialogShow, setFullDialog] = useState(false);
+  const openFullDialog = () => {
+    setFullDialog(true);
+  };
+
+  const closeFullDialog = () => {
+    console.log("closeFullDialog");
+    setFullDialog(false);
+  };
+
   const { id } = useParams();
   const { golfzone } = useSelector((state) => state);
   let index = golfzone.findIndex((e) => e.id === id);
@@ -160,10 +170,15 @@ export default function Detail() {
         <Divider />
 
         <Box className="btn_box">
-          <Drawer target={target} />
+          <Drawer target={target} open={openFullDialog} />
         </Box>
       </DetailBox>
-      <FullScreenDialog target={target} />
+      <FullScreenDialog
+        target={target}
+        show={fullDialogShow}
+        open={openFullDialog}
+        close={closeFullDialog}
+      />
     </>
   );
 }

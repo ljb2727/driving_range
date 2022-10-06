@@ -15,22 +15,13 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
 
-import { openDialog } from "store";
-import { useDispatch } from "react-redux";
-
-export default function MyDrawer({ target, anchor = "bottom" }) {
-  const dispatch = useDispatch();
-
+export default function MyDrawer({ target, anchor = "bottom", open }) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
-  const dialog = () => {
-    dispatch(openDialog());
-  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     console.log("toggleDrawer");
@@ -80,7 +71,7 @@ export default function MyDrawer({ target, anchor = "bottom" }) {
       </CardContent>
       <CardActions>
         <Button variant="outlined">회원(기간/쿠폰)</Button>
-        <Button onClick={() => dialog()}>일일고객</Button>
+        <Button onClick={() => open()}>일일고객</Button>
       </CardActions>
     </Card>
   );
