@@ -15,6 +15,7 @@
     "hangul-chosung-search": "^1.0.2",
     "hangul-js": "^0.2.6",
     "match-sorter": "^6.3.1",
+    "moment": "^2.29.4",
     "notistack": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

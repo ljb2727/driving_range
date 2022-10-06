@@ -9,19 +9,27 @@ let golfzone = createSlice({
 //dialog 전역 상태
 let showDialog = createSlice({
   name: "dialog",
-  initialState: false,
+  initialState: { show: false, title: "", text: "" },
   reducers: {
-    openDialog() {
+    openDialog(state, action) {
       console.log("open dialog");
-      return true;
+
+      state.show = true;
+
+      if (typeof action.payload !== "undefined") {
+        state.title = action.payload.title;
+        state.text = action.payload.text;
+      }
+      return state;
     },
-    closeDialog() {
+    closeDialog(state) {
       console.log("close dialog");
-      return false;
+      state.show = false;
+      return state;
     },
-    toggleDialog(state) {
+    toggleDialog(state, action) {
       console.log("toggle dialog");
-      return !state;
+      return (state.show = !state);
     },
   },
 });
@@ -60,7 +68,7 @@ let driveBox = createSlice({
       time = 남은 시간
        */
       const { id, list, time } = action.payload;
-      state[0].타석[0].리스트[1].남은시간 = 50;
+      //state[0].타석[0].리스트[1].남은시간 = 10;
       return state;
     },
   },

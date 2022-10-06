@@ -15,7 +15,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/system";
 
-import { toggleDialog } from "store";
+import { openDialog } from "store";
 import { useDispatch } from "react-redux";
 
 export default function MyDrawer({ target, anchor = "bottom" }) {
@@ -29,7 +29,7 @@ export default function MyDrawer({ target, anchor = "bottom" }) {
   });
 
   const dialog = () => {
-    dispatch(toggleDialog());
+    dispatch(openDialog());
   };
 
   const toggleDrawer = (anchor, open) => (event) => {

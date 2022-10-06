@@ -17,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function FullScreenDialog({ target }) {
   const dispatch = useDispatch();
-  const { showDialog } = useSelector((state) => state);
+  const { show } = useSelector((state) => state.showDialog);
 
   const handleClickOpen = () => {
     dispatch(openDialog());
@@ -31,11 +31,11 @@ export default function FullScreenDialog({ target }) {
     <div>
       <Dialog
         fullScreen
-        open={showDialog}
+        open={show}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar sx={{ position: "relative" }} elevation={0}>
           <Toolbar>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               {target.label}

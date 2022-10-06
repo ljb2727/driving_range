@@ -11,15 +11,17 @@ import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { setTime } from "store";
+import { useNavigate, useParams } from "react-router-dom";
+import { setTime, closeDialog } from "store";
 
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 
+import Snackbar from "components/common/Snackbar";
+
+import moment from "moment";
+import "moment/locale/ko";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -55,27 +57,28 @@ export default function BasicTabs() {
   };
 
   // *dispatch
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setTime({ id: id, listId: 1, time: 60 }));
-  });
 
   return (
     <Box sx={{ width: "100%" }}>
+      {moment().format("YYYY-MM-DD HH:mm:ss")}
       <CardMedia component="img" image={current.이미지} />
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        {/* 탭메뉴 */}
         <Tabs value={value} onChange={handleChange} variant="fullWidth">
           {current.타석.map((e, i) => {
             return <Tab label={`${e.층수}층`} key={i} />;
           })}
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <DriveBox value={value} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <DriveBox value={value} />
-      </TabPanel>
+
+      {/* 탭컨텐츠     */}
+      {current.타석.map((e, i) => {
+        return (
+          <TabPanel value={value} index={i} key={i}>
+            <DriveBox value={value} id={id} />
+          </TabPanel>
+        );
+      })}
     </Box>
   );
 }
@@ -109,9 +112,27 @@ const StyleOption = styled(Box)`
   border-radius: 3px 3px 0 0;
 `;
 
-function DriveBox({ value }) {
+function DriveBox({ value, id }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [showSnack, setSnack] = React.useState(false);
+
+  // *타석클릭
+  const onBooking = (time, floor, box) => {
+    if (time === null && !showSnack) {
+      setSnack(true);
+      setTimeout(() => {
+        setSnack(false);
+      }, 1000);
+    } else if (time !== null) {
+      dispatch(closeDialog());
+      navigate(`/pay/${id}/${floor}/${box}`);
+    }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
+      {showSnack && <Snackbar>예약이 불가한 타석 입니다.</Snackbar>}
+
       <Grid container spacing={1} rowSpacing={2}>
         {current.타석[value].리스트.map((e, i) => {
           return (
@@ -120,6 +141,9 @@ function DriveBox({ value }) {
               xs={4}
               key={e.id}
               sx={{ filter: e.남은시간 === null && "grayscale(1)" }}
+              onClick={() =>
+                onBooking(e.남은시간, current.타석[value].층수, e.id)
+              }
             >
               <Box sx={{ position: "relative", paddingTop: "1rem" }}>
                 <StyleOption className="option">{e.옵션}</StyleOption>
