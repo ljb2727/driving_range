@@ -1,16 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {
-  Box,
-  Card,
-  Paper,
-  Stack,
-  Typography,
-  Divider,
-  Grid,
-  styled,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Divider, Grid, styled, Button } from "@mui/material";
 import {
   Radio,
   RadioGroup,
@@ -22,7 +12,7 @@ import {
 import Drawer from "components/pay/Drawer";
 import { useSelector, useDispatch } from "react-redux";
 import Dialog from "components/common/Dialog";
-import { openDialog, closeDialog } from "store";
+import { openDialog } from "store";
 
 const Item = styled(Box)(({ theme }) => ({
   fontSize: "0.9rem",
@@ -118,7 +108,7 @@ export default function Pay() {
     } else if (index === 1) {
       let action = {
         title: "예약 규정에 대한 동의",
-        text: `<div class="new_gray_box" style="display: block;">
+        text: `<div class="new_gray_box" >
 							<ul>
 								<li><span class="">임박 취소(예약 시간 15분 내) 및 미내장의 경우 이용 정책에 따른 패널티가 발생 합니다</span></li>
 								<li><span class="">연습장 현장 상황에 따라 타석 이용 시작 시간이 변경될 수 있습니다.</span></li>
@@ -131,10 +121,6 @@ export default function Pay() {
       };
       dispatch(openDialog(action));
     }
-  };
-
-  const handleClose = () => {
-    dispatch(closeDialog());
   };
 
   return (
@@ -188,14 +174,21 @@ export default function Pay() {
 
         <Item>
           <Typography component="h1">결제금액</Typography>
-          <Grid container justifyContent="space-between">
-            <Grid item>1</Grid>
-            <Grid item>1</Grid>
+          <Grid container justifyContent="space-between" rowSpacing={1}>
+            <Grid item xs={6}>
+              결제금액
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: "right" }}>
+              0원
+            </Grid>
+            <Grid item xs={6}>
+              쿠폰
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: "right" }}>
+              0원
+            </Grid>
           </Grid>
-          <Grid container justifyContent="space-between">
-            <Grid item>1</Grid>
-            <Grid item>1</Grid>
-          </Grid>
+
           <Box
             sx={{
               backgroundColor: "gray.light",

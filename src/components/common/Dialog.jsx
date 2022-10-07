@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
-import { openDialog, closeDialog, toggleDialog } from "store";
+import { closeDialog } from "store";
 
 export default function ScrollDialog(props) {
   const dispatch = useDispatch();

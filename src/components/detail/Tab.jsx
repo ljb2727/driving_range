@@ -1,18 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { setTime, closeDialog } from "store";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
