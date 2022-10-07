@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Divider, Box, styled, Button, Skeleton } from "@mui/material";
 import FullScreenDialog from "components/detail/FullScreenDialog";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

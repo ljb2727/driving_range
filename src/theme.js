@@ -41,6 +41,15 @@ const theme = createTheme({
         },
       },
     },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          padding: "0",
+          marginLeft: "0",
+        },
+      },
+    },
+
     MuiPaper: {
       styleOverrides: {
         root: {

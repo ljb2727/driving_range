@@ -11,11 +11,13 @@ import {
   CardActions,
   Typography,
   IconButton,
+  TextField,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { styled } from "@mui/system";
 
-export default function MyDrawer({ target, anchor = "bottom", open }) {
+export default function MyDrawer({ anchor = "bottom", open }) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -56,7 +58,7 @@ export default function MyDrawer({ target, anchor = "bottom", open }) {
             <CloseIcon sx={{ color: "#7f7f7f" }} />
           </IconButton>
         }
-        title="타석 예약"
+        title="쿠폰 사용"
         align="center"
         titleTypographyProps={{
           fontSize: "16px",
@@ -64,16 +66,18 @@ export default function MyDrawer({ target, anchor = "bottom", open }) {
         }}
       />
       <CardContent>
-        <Typography sx={{ fontWeight: "bold", fontSize: "14px" }}>
-          {target.label} 예약
+        <Typography sx={{ fontWeight: "bold", fontSize: "14px", mb: 1 }}>
+          쿠폰번호 입력
         </Typography>
-        <Typography sx={{ fontSize: "14px" }}>골프연습장 회원 구분</Typography>
+        <Box component="form" autoComplete="off">
+          <TextField variant="outlined" size="small" fullWidth={true} />
+        </Box>
       </CardContent>
-      <CardActions sx={{ m: 1 }}>
-        <Button onClick={() => open()} variant="outlined">
-          회원(기간/쿠폰)
+      <CardActions sx={{ mx: 1 }}>
+        <Button onClick={toggleDrawer(anchor, false)} variant="outlined">
+          취소
         </Button>
-        <Button onClick={() => open()}>일일고객</Button>
+        <Button onClick={toggleDrawer(anchor, false)}>쿠폰 등록</Button>
       </CardActions>
     </Card>
   );
@@ -81,12 +85,17 @@ export default function MyDrawer({ target, anchor = "bottom", open }) {
   return (
     <div>
       <Button
-        fullWidth
-        variant="contained"
-        size="large"
+        variant="outlined"
+        endIcon={<ArrowRightIcon />}
+        size="small"
         onClick={toggleDrawer("bottom", true)}
+        sx={{
+          "& .MuiButton-endIcon": {
+            marginLeft: "0",
+          },
+        }}
       >
-        <strong>타석 예약</strong>
+        사용
       </Button>
       <NewDrawer
         anchor={anchor}

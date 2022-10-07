@@ -9,6 +9,7 @@ import {
   Divider,
   Grid,
   styled,
+  Button,
 } from "@mui/material";
 import {
   Radio,
@@ -18,11 +19,13 @@ import {
   Link,
 } from "@mui/material";
 
+import Drawer from "components/pay/Drawer";
 import { useSelector, useDispatch } from "react-redux";
 import Dialog from "components/common/Dialog";
 import { openDialog, closeDialog } from "store";
 
 const Item = styled(Box)(({ theme }) => ({
+  fontSize: "0.9rem",
   padding: theme.spacing(2),
   margin: "0px !important",
   ":not(:first-of-type)": {
@@ -33,20 +36,27 @@ const Item = styled(Box)(({ theme }) => ({
     fontWeight: "bold",
     fontSize: "1rem",
     textAlign: "left",
-    padding: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
   },
+
+  "& dl": { display: "flex" },
+  "& dl:not(:first-of-type)": { marginTop: theme.spacing(1) },
+  "& dt": { flexBasis: "5em", textAlign: "left", fontWeight: "bold" },
+  "& dd": {},
 }));
 
 function StyleRadio({ radio }) {
   return (
-    <FormControl>
+    <FormControl sx={{ display: "flex" }}>
       <RadioGroup defaultValue="0" name="radio-buttons-group">
         {radio.map((radio, index) => (
           <FormControlLabel
+            labelPlacement="end"
             value={index}
             control={<Radio />}
             label={radio.상품명}
             key={index}
+            sx={{ marginLeft: "0", marginBottom: 1 }}
           />
         ))}
       </RadioGroup>
@@ -129,9 +139,6 @@ export default function Pay() {
 
   return (
     <>
-      <p>{`id :${id}`}</p>
-      <p>{`타석 :${box}`}</p>
-      <p>{`층수 :${floor}`}</p>
       <Box sx={{ width: "100%" }}>
         <Item>
           <Typography component="h1">예약정보</Typography>
@@ -152,10 +159,10 @@ export default function Pay() {
             <dd>282</dd>
           </dl>
 
-          <Typography component="p" color="green" align="left">
+          <Typography component="p" color="green" align="left" sx={{ mt: 2 }}>
             취소 가능기한 2022.10.05(수) 19:46
           </Typography>
-          <Typography component="p" color="red" align="left">
+          <Typography component="p" color="red" align="left" sx={{ mt: 1 }}>
             ※ 단, 예약 후 다음 대기자가 있을 경우 예약취소가 불가합니다.
           </Typography>
         </Item>
@@ -164,14 +171,16 @@ export default function Pay() {
           <Typography component="h1">상품선택</Typography>
           <StyleRadio radio={current.상품} />
           <Divider />
-          <Typography component="h1">할인정보</Typography>
+          <Typography component="h1" sx={{ mt: 1 }}>
+            할인정보
+          </Typography>
           <Box>
-            <Grid container justifyContent="space-between">
+            <Grid container justifyContent="space-between" alignItems="center">
               <Grid item>
                 <Box>쿠폰</Box>
               </Grid>
               <Grid item>
-                <Box>사용</Box>
+                <Drawer />
               </Grid>
             </Grid>
           </Box>
@@ -215,12 +224,16 @@ export default function Pay() {
             ,
             <Link onClick={() => handleClickOpen(1)}>
               예약 규정에 대한 동의
-            </Link>{" "}
+            </Link>
             내용을 확인하였으며, 결제 진행에 동의합니다.
           </Typography>
-          <Dialog />
+
+          <Button fullWidth variant="contained" size="large" sx={{ mt: 1 }}>
+            <strong>예약</strong>
+          </Button>
         </Item>
       </Box>
+      <Dialog />
     </>
   );
 }
