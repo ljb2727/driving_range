@@ -79,11 +79,49 @@ export default function ResultList() {
     }
   }, []);
 
+  const onChange = (event) => {
+    let value = event.target.value;
+    setSort(value);
+    sorting(value);
+  };
+
+  const onChageHeart = (number) => {
+    console.log("하트변경");
+    dispatch(changeHeart(number));
+    sorting(sort);
+    console.log(sort);
+  };
+
+  // !즐겨찾기 버튼
+  const [favorite, setFavorite] = useState(false);
+  const onFavorite = (event) => {
+    if (event.target.checked) {
+      setFavorite(true);
+      console.log("checked");
+    } else {
+      setFavorite(false);
+      console.log("un checked");
+    }
+  };
+
+  // !할인가
+  const [price, setPrice] = useState(false);
+  const onPrice = (event) => {
+    if (event.target.checked) {
+      setPrice(true);
+      console.log("price check");
+    } else {
+      setPrice(false);
+      console.log("price uncheck");
+    }
+  };
+
   // !정렬기능
   useEffect(() => {
     sorting(sort);
-  }, [sort]);
+  }, []);
   const sorting = (value) => {
+    console.log(favorite);
     if (value === "distance") {
       copyList.sort((a, b) => {
         if (a.거리 > b.거리) {
@@ -105,44 +143,10 @@ export default function ResultList() {
         }
       });
     }
-  };
-  const onChange = (event) => {
-    let value = event.target.value;
-    sorting(value);
-    setSort(value);
-  };
-
-  const onChageHeart = (id) => {
-    dispatch(changeHeart(id));
-  };
-
-  // !즐겨찾기 버튼
-  const [favorite, setFavorite] = useState(false);
-  const onFavorite = (event) => {
-    if (event.target.checked) {
-      setFavorite(true);
-      console.log("checked");
-      console.log(myHeart);
-
-      //setCopyList(save);
-      return false;
-    } else {
-      setFavorite(false);
-      console.log("un checked");
-    }
-    event.preventDefault();
-    event.stopPropagation();
-  };
-
-  // !할인가
-  const [price, setPrice] = useState(false);
-  const onPrice = (event) => {
-    if (event.target.checked) {
-      setPrice(true);
-      console.log("price check");
-    } else {
-      setPrice(false);
-      console.log("price uncheck");
+    if (favorite === true) {
+      copyList.sort((a, b) => {
+        return myHeart.includes(b.id) ? 0 : -1;
+      });
     }
   };
 
@@ -163,10 +167,10 @@ export default function ResultList() {
                 onChange={(event) => onFavorite(event)}
               />
             }
-            label="즐겨찾기"
+            label={`즐겨찾기/${favorite}`}
             size="small"
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             className="check"
             control={
               <Checkbox
@@ -177,7 +181,7 @@ export default function ResultList() {
             }
             label="할인가"
             size="small"
-          />
+          /> */}
         </Box>
 
         <FormControl
@@ -226,7 +230,7 @@ export default function ResultList() {
                   checkedIcon={<Favorite color="green" />}
                   onClick={(e) => {
                     e.stopPropagation();
-                    onChageHeart(item.id);
+                    onChageHeart({ number: item.id, favorite: favorite });
                   }}
                 />
                 {item.할인가 && <Box className="banner">할인가</Box>}

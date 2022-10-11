@@ -44,7 +44,10 @@ let myHeart = createSlice({
     },
     changeHeart(state, action) {
       console.log("즐겨찾기");
-      const id = action.payload;
+
+      const id = action.payload.number;
+      const favorite = action.payload.favorite;
+      console.log(`id:${id}, favorite:${favorite}`);
       if (state.includes(id)) {
         state.splice(state.indexOf(id), 1);
       } else {
