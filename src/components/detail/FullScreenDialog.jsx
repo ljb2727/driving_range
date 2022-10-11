@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,7 +13,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FullScreenDialog({ target, show, open, close }) {
-  console.log(close);
   return (
     <div>
       <Dialog fullScreen open={show} TransitionComponent={Transition}>

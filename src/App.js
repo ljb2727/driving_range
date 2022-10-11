@@ -7,18 +7,19 @@ import theme from "theme";
 import Main from "routes/Main";
 import Detail from "routes/Detail";
 import Pay from "routes/Pay";
-import Test from "routes/Test";
+
+import AppBar from "components/common/AppBar";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Fade in>
         <div className="App">
+          <AppBar />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/pay/:id/:floor/:box/" element={<Pay />} />
-            <Route path="/test" element={<Test />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </div>
