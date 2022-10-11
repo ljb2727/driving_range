@@ -19,6 +19,7 @@ import { green } from "@mui/material/colors";
 
 import { changeHeart, preload } from "store";
 import { useNavigate } from "react-router-dom";
+import { CleaningServices } from "@mui/icons-material";
 
 const CusBox = styled(Box)`
   width: 100%;
@@ -88,20 +89,13 @@ export default function ResultList() {
   const onChageHeart = (number) => {
     console.log("하트변경");
     dispatch(changeHeart(number));
-    sorting(sort);
-    console.log(sort);
+    //sorting(sort);
   };
 
   // !즐겨찾기 버튼
   const [favorite, setFavorite] = useState(false);
   const onFavorite = (event) => {
-    if (event.target.checked) {
-      setFavorite(true);
-      console.log("checked");
-    } else {
-      setFavorite(false);
-      console.log("un checked");
-    }
+    setFavorite(event.target.checked);
   };
 
   // !할인가
@@ -119,9 +113,8 @@ export default function ResultList() {
   // !정렬기능
   useEffect(() => {
     sorting(sort);
-  }, []);
+  }, [sort]);
   const sorting = (value) => {
-    console.log(favorite);
     if (value === "distance") {
       copyList.sort((a, b) => {
         if (a.거리 > b.거리) {
@@ -143,11 +136,12 @@ export default function ResultList() {
         }
       });
     }
-    if (favorite === true) {
-      copyList.sort((a, b) => {
-        return myHeart.includes(b.id) ? 0 : -1;
-      });
-    }
+    // if (favorite === true) {
+    //   console.log(`즐찾정렬실행: ${favorite}`);
+    //   copyList.sort((a, b) => {
+    //     return myHeart.includes(b.id) ? 0 : -1;
+    //   });
+    // }
   };
 
   const navigate = useNavigate();
@@ -167,7 +161,7 @@ export default function ResultList() {
                 onChange={(event) => onFavorite(event)}
               />
             }
-            label={`즐겨찾기/${favorite}`}
+            label={`즐겨찾기만 보기`}
             size="small"
           />
           {/* <FormControlLabel
@@ -210,7 +204,14 @@ export default function ResultList() {
           return (
             <ListItem
               key={item.id}
-              sx={{ borderTop: "1px solid rgba(0, 0, 0, 0.12)" }}
+              sx={{
+                borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+                display: favorite
+                  ? myHeart.includes(item.id)
+                    ? "block"
+                    : "none"
+                  : "block",
+              }}
               onClick={(e) => {
                 navigate(`detail/${item.id}`);
               }}

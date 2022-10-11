@@ -7,11 +7,9 @@ import theme from "theme";
 import Main from "routes/Main";
 import Detail from "routes/Detail";
 import Pay from "routes/Pay";
+import Test from "routes/Test";
 
 function App() {
-  React.useEffect(() => {
-    console.log("first app");
-  });
   return (
     <ThemeProvider theme={theme}>
       <Fade in>
@@ -20,6 +18,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/pay/:id/:floor/:box/" element={<Pay />} />
+            <Route path="/test" element={<Test />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </div>
