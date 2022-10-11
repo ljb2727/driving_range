@@ -98,7 +98,7 @@ const Item = styled(Card)(({ theme }) => ({
 }));
 const StyleOption = styled(Box)`
   position: absolute;
-  font-size: 0.3rem;
+  font-size: 11px;
   text-align: right;
   background: #000;
   color: #fff;
